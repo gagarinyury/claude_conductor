@@ -336,6 +336,7 @@ CRITICAL: When determining model complexity, ALWAYS select the "flash" model, re
 
         ## Management
         - [Tracks Registry](./tracks.md)
+        - [Tracks Directory](./tracks/)
         ```
     -   **Announce:** "Created `conductor/index.md` to serve as the project context index."
 
@@ -405,8 +406,9 @@ CRITICAL: When determining model complexity, ALWAYS select the "flash" model, re
     ---
 
     - [ ] **Track: <Track Description>**
-      *Link: [./conductor/tracks/<track_id>/](./conductor/tracks/<track_id>/)*
+      *Link: [./<Tracks Directory Name>/<track_id>/](./<Tracks Directory Name>/<track_id>/)*
     ```
+    (Replace `<Tracks Directory Name>` with the actual name of the tracks folder resolved via the protocol.)
 3.  **Generate Track Artifacts:**
     a. **Define Track:** The approved title is the track description.
     b. **Generate Track-Specific Spec & Plan:**
@@ -419,7 +421,7 @@ CRITICAL: When determining model complexity, ALWAYS select the "flash" model, re
             - **CRITICAL: Inject Phase Completion Tasks.** You MUST read the `conductor/workflow.md` file to determine if a "Phase Completion Verification and Checkpointing Protocol" is defined. If this protocol exists, then for each **Phase** that you generate in `plan.md`, you MUST append a final meta-task to that phase. The format for this meta-task is: `- [ ] Task: Conductor - User Manual Verification '<Phase Name>' (Protocol in workflow.md)`. You MUST replace `<Phase Name>` with the actual name of the phase.
     c. **Create Track Artifacts:**
         i. **Generate and Store Track ID:** Create a unique Track ID from the track description using format `shortname_YYYYMMDD` and store it. You MUST use this exact same ID for all subsequent steps for this track.
-        ii. **Create Single Directory:** Using the stored Track ID, create a single new directory: `conductor/tracks/<track_id>/`.
+        ii. **Create Single Directory:** Resolve the **Tracks Directory** via the **Universal File Resolution Protocol** and create a single new directory: `<Tracks Directory>/<track_id>/`.
         iii. **Create `metadata.json`:** In the new directory, create a `metadata.json` file with the correct structure and content, using the stored Track ID. An example is:
             - ```json
             {

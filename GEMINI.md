@@ -9,7 +9,13 @@ To find a file (e.g., "**Product Definition**") within a specific context (Proje
 
 1.  **Identify Index:** Determine the relevant index file:
     -   **Project Context:** `conductor/index.md`
-    -   **Track Context:** `conductor/tracks/<track_id>/index.md`
+    -   **Track Context:**
+        a. Resolve and read the **Tracks Registry** (via Project Context).
+        b. Find the entry for the specific `<track_id>`.
+        c. Follow the link provided in the registry to locate the track's folder. The index file is `<track_folder>/index.md`.
+        d. **Fallback:** If the track is not yet registered (e.g., during creation) or the link is broken:
+            1. Resolve the **Tracks Directory** (via Project Context).
+            2. The index file is `<Tracks Directory>/<track_id>/index.md`.
 
 2.  **Check Index:** Read the index file and look for a link with a matching or semantically similar label.
 
@@ -26,6 +32,7 @@ To find a file (e.g., "**Product Definition**") within a specific context (Proje
 - **Workflow**: `conductor/workflow.md`
 - **Product Guidelines**: `conductor/product-guidelines.md`
 - **Tracks Registry**: `conductor/tracks.md`
+- **Tracks Directory**: `conductor/tracks/`
 
 **Standard Default Paths (Track):**
 - **Specification**: `conductor/tracks/<track_id>/spec.md`
