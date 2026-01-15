@@ -1,6 +1,7 @@
 ---
 description: Create a new feature track or bug fix
-argument-hint: [description]
+argument-hint: <description>
+allowed-tools: [Read, Write, Edit, Glob, Grep, Bash, Task]
 ---
 
 ## 1.0 SYSTEM DIRECTIVE

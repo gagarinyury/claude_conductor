@@ -1,0 +1,22 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "conductor-marketplace",
+  "description": "Conductor plugin for spec-driven development in Claude Code",
+  "owner": {
+    "name": "Yury Gagarin",
+    "email": "yurcheg13@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "conductor",
+      "description": "Spec-driven development framework. Plan before you build with tracks, specs, and implementation plans.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Yury Gagarin",
+        "email": "yurcheg13@gmail.com"
+      },
+      "source": "./",
+      "homepage": "https://github.com/gagarinyury/claude_conductor"
+    }
+  ]
+}

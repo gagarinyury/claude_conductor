@@ -1,97 +1,136 @@
-# Conductor for Claude Code 🤖
+# Conductor for Claude Code
 
 **Measure twice, code once.**
 
-> 🚀 **Forked from [Gemini Conductor](https://github.com/gemini-cli-extensions/conductor) and adapted for Claude Code.**
-
-Conductor enables **Context-Driven Development** for Claude Code. It turns Claude into a proactive project manager that follows a strict protocol to specify, plan, and implement software features.
+Conductor is a Claude Code plugin that enables **Spec-Driven Development**. It transforms Claude into a proactive project manager that follows a strict protocol to specify, plan, and implement software features.
 
 Instead of just writing code, Conductor ensures a consistent, high-quality lifecycle for every task: **Context -> Spec & Plan -> Implement**.
 
-## ✨ Features
+## Installation
 
-- **Plan before you build**: Create specs and plans that guide the agent for new and existing codebases.
-- **Maintain context**: Ensure Claude follows style guides, tech stack choices, and product goals.
-- **Iterate safely**: Review plans before code is written.
-- **Persistent Memory**: Project context is stored in markdown files, not in the chat history.
-- **Native Claude Commands**: Installs directly into `.claude/commands` for a seamless experience.
+### From GitHub (recommended)
 
-## 📦 Installation
-
-You can install Conductor into any project using the included installation script.
-
-1.  Clone this repository to a central location (e.g., your home directory):
-    ```bash
-    git clone https://github.com/gagarinyury/claude_conductor.git ~/.claude_conductor
-    ```
-
-2.  Run the installer for your target project:
-    ```bash
-    # Go to the conductor directory
-    cd ~/.claude_conductor
-
-    # Run install.sh pointing to your project path
-    ./install.sh /path/to/your/project
-    ```
-    *(If you are already inside your project folder, you can run `~/.claude_conductor/install.sh .`)*
-
-This script will:
-- Install slash commands (`/setup`, `/new-track`, `/implement`) into `.claude/commands/`.
-- Copy templates to `templates/`.
-- Configure `CLAUDE.md` with the necessary protocols.
-
-## 🚀 Usage
-
-Once installed, use these **Slash Commands** directly in Claude Code.
-
-### 1. Initialize Project (`/setup`)
-
-Run this command to analyze your codebase (or start fresh) and create the `conductor/` context folder.
+Add the Conductor marketplace and install the plugin:
 
 ```bash
-> /setup
+claude plugin marketplace add https://github.com/gagarinyury/claude_conductor
+claude plugin install conductor@conductor-marketplace
 ```
-*Claude will ask you about your product goals, tech stack, and workflow preferences.*
 
-### 2. Create a Track (`/new-track`)
+### From Official Marketplace (coming soon)
 
-When you want to build a feature or fix a bug, don't just say "do X". Create a track.
+Once accepted into the official marketplace:
 
 ```bash
-> /new-track "Add dark mode to settings"
+claude plugin install conductor
 ```
-*Claude will interview you to create a detailed `spec.md` and `plan.md` in `conductor/tracks/`.*
 
-### 3. Implement (`/implement`)
+## Features
 
-Execute the plan. Claude will follow TDD (Test Driven Development) or your custom workflow defined in `conductor/workflow.md`.
+- **Plan before you build**: Create specs and plans that guide the agent for new and existing codebases
+- **Maintain context**: Ensure Claude follows style guides, tech stack choices, and product goals
+- **Iterate safely**: Review plans before code is written
+- **Persistent Memory**: Project context is stored in markdown files, not in the chat history
+- **Git-aware revert**: Intelligently revert tracks, phases, or tasks with full git history awareness
 
-```bash
-> /implement
+## Commands
+
+| Command | Description |
+|---------|-------------|
+| `/conductor-setup` | Initialize Conductor in a new project. Creates `conductor/` folder with product, tech stack, and workflow definitions |
+| `/conductor-new <description>` | Create a new feature track or bug fix. Generates `spec.md` and `plan.md` |
+| `/conductor-implement [track]` | Execute the tasks defined in a track's plan following your workflow |
+| `/conductor-status` | Display the current progress of all tracks |
+| `/conductor-revert` | Revert previous work (tracks, phases, or tasks) with git awareness |
+
+## Usage
+
+### 1. Initialize Project
+
 ```
-*Claude works through the checklist in `plan.md`, marking tasks as done and updating the project documentation.*
+> /conductor-setup
+```
 
-## 📂 Project Structure
+Claude will interview you about your product goals, tech stack, and workflow preferences, then create the `conductor/` context folder.
+
+### 2. Create a Track
+
+When you want to build a feature or fix a bug, create a track instead of coding immediately:
+
+```
+> /conductor-new "Add dark mode to settings"
+```
+
+Claude will create a detailed `spec.md` and `plan.md` in `conductor/tracks/`.
+
+### 3. Implement
+
+Execute the plan. Claude will follow TDD or your custom workflow defined in `conductor/workflow.md`:
+
+```
+> /conductor-implement
+```
+
+Claude works through the checklist in `plan.md`, marking tasks as done and committing changes.
+
+### 4. Check Status
+
+```
+> /conductor-status
+```
+
+Get an overview of all tracks and their progress.
+
+## Project Structure
 
 Conductor creates a `conductor/` directory in your project root:
 
-```text
+```
 conductor/
 ├── product.md            # What are we building?
 ├── tech-stack.md         # What tools are we using?
 ├── workflow.md           # How do we work? (TDD, commits, etc.)
+├── product-guidelines.md # Brand voice, style guidelines
 ├── tracks.md             # Registry of all features/bugs
 └── tracks/
-    └── feature-login/    # Context for a specific feature
+    └── feature-dark-mode/
         ├── spec.md       # Requirements
-        ├── plan.md       # Checklist
+        ├── plan.md       # Implementation checklist
         └── metadata.json
 ```
 
-## 🤝 Contributing
+## Plugin Structure
 
-We welcome contributions to adapt more features from the original Gemini Conductor!
+```
+conductor/
+├── .claude-plugin/
+│   ├── plugin.json       # Plugin manifest
+│   └── marketplace.json  # Marketplace definition
+├── commands/             # Slash commands
+│   ├── conductor-setup.md
+│   ├── conductor-new.md
+│   ├── conductor-implement.md
+│   ├── conductor-status.md
+│   └── conductor-revert.md
+├── skills/               # Auto-activated skills
+│   └── conductor-context/
+│       └── SKILL.md
+└── templates/            # Workflow templates
+```
 
-## 📜 License
+## Contributing
 
-Apache License 2.0 (Inherited from original project)
+We welcome contributions! Please open issues or submit PRs.
+
+## License & Credits
+
+This project is a derivative work based on [Conductor](https://github.com/gemini-cli-extensions/conductor) by the Gemini CLI Extensions team, licensed under Apache License 2.0.
+
+**Changes made in this fork:**
+- Migrated from Gemini TOML format to Claude Code Markdown commands
+- Converted to Claude Code plugin format
+- Renamed commands with `conductor-` prefix
+- Added `conductor-status` and `conductor-revert` commands
+- Added skill for automatic context loading
+
+Licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) for details.

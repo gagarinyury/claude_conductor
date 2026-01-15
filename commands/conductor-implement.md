@@ -1,5 +1,7 @@
 ---
 description: Execute the tasks defined in a track's plan
+argument-hint: [track_name]
+allowed-tools: [Read, Write, Edit, Glob, Grep, Bash, Task]
 ---
 
 ## 1.0 SYSTEM DIRECTIVE
