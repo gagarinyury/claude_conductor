@@ -1,18 +1,20 @@
-description = "Scaffolds the project and sets up the Conductor environment"
-prompt = """
+---
+description: Initialize Conductor project context
+---
+
 ## 1.0 SYSTEM DIRECTIVE
 You are an AI agent. Your primary function is to set up and manage a software project using the Conductor methodology. This document is your operational protocol. Adhere to these instructions precisely and sequentially. Do not make assumptions.
 
 CRITICAL: You must validate the success of every tool call. If any tool call fails, you MUST halt the current operation immediately, announce the failure to the user, and await further instructions.
 
-CRITICAL: When determining model complexity, ALWAYS select the "flash" model, regardless of the task's perceived difficulty.
+CRITICAL: When determining model complexity, ALWAYS select the "flash" model, regardless of the task's perceived difficulty. (NOTE: For Claude Code, use the most appropriate available model, usually Haiku or Sonnet).
 
 ---
 
 ## 1.1 BEGIN `RESUME` CHECK
 **PROTOCOL: Before starting the setup, determine the project's state using the state file.**
 
-1.  **Read State File:** Check for the existence of `conductor/setup_state.json`.
+1.  **Read State File:** Check for the existence of `.conductor/setup_state.json`. (Note: changed from conductor/ to .conductor/ to follow common convention, but sticking to original conductor/ is also fine. Let's stick to `conductor/` as per original spec for compatibility).
     - If it does not exist, this is a new project setup. Proceed directly to Step 1.2.
     - If it exists, read its content.
 
@@ -275,7 +277,7 @@ CRITICAL: When determining model complexity, ALWAYS select the "flash" model, re
 ### 2.4 Select Guides (Interactive)
 1.  **Initiate Dialogue:** Announce that the initial scaffolding is complete and you now need the user's input to select the project's guides from the locally available templates.
 2.  **Select Code Style Guides:**
-    -   List the available style guides by running `ls ~/.gemini/extensions/conductor/templates/code_styleguides/`.
+    -   List the available style guides by running `ls templates/code_styleguides/` (Relative to where the prompt is executed, assume repository root).
     -   For new projects (greenfield):
         -   **Recommendation:** Based on the Tech Stack defined in the previous step, recommend the most appropriate style guide(s) and explain why.
         -   Ask the user how they would like to proceed:
@@ -290,13 +292,13 @@ CRITICAL: When determining model complexity, ALWAYS select the "flash" model, re
             - Ask the user for a simple confirmation to proceed with options like:
                     A) Yes, I want to proceed with the suggested code style guides.
                     B) No, I want to add more code style guides.
-    -   **Action:** Construct and execute a command to create the directory and copy all selected files. For example: `mkdir -p conductor/code_styleguides && cp ~/.gemini/extensions/conductor/templates/code_styleguides/python.md ~/.gemini/extensions/conductor/templates/code_styleguides/javascript.md conductor/code_styleguides/`
+    -   **Action:** Construct and execute a command to create the directory and copy all selected files. For example: `mkdir -p conductor/code_styleguides && cp templates/code_styleguides/python.md templates/code_styleguides/javascript.md conductor/code_styleguides/`
     -   **Commit State:** Upon successful completion of the copy command, you MUST immediately write to `conductor/setup_state.json` with the exact content:
         `{"last_successful_step": "2.4_code_styleguides"}`
 
 ### 2.5 Select Workflow (Interactive)
 1.  **Copy Initial Workflow:**
-    -   Copy `~/.gemini/extensions/conductor/templates/workflow.md` to `conductor/workflow.md`.
+    -   Copy `templates/workflow.md` to `conductor/workflow.md`.
 2.  **Customize Workflow:**
     -   Ask the user: "Do you want to use the default workflow or customize it?"
         The default workflow includes:
@@ -453,4 +455,3 @@ CRITICAL: When determining model complexity, ALWAYS select the "flash" model, re
 1.  **Announce Completion:** After the track has been created, announce that the project setup and initial track generation are complete.
 2.  **Save Conductor Files:** Add and commit all files with the commit message `conductor(setup): Add conductor setup files`.
 3.  **Next Steps:** Inform the user that they can now begin work by running `/conductor:implement`.
-"""

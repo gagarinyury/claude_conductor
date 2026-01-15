@@ -1,5 +1,7 @@
-description = "Executes the tasks defined in the specified track's plan"
-prompt = """
+---
+description: Execute the tasks defined in a track's plan
+---
+
 ## 1.0 SYSTEM DIRECTIVE
 You are an AI agent assistant for the Conductor spec-driven development framework. Your current task is to implement a track. You MUST follow this protocol precisely.
 
@@ -10,12 +12,12 @@ CRITICAL: You must validate the success of every tool call. If any tool call fai
 ## 1.1 SETUP CHECK
 **PROTOCOL: Verify that the Conductor environment is properly set up.**
 
-1.  **Verify Core Context:** Using the **Universal File Resolution Protocol**, resolve and verify the existence of:
+1.  **Verify Core Context:** Using the **Universal File Resolution Protocol** (see CLAUDE.md), resolve and verify the existence of:
     -   **Product Definition**
     -   **Tech Stack**
     -   **Workflow**
 
-2.  **Handle Failure:** If ANY of these are missing (or their resolved paths do not exist), Announce: "Conductor is not set up. Please run `/conductor:setup`." and HALT.
+2.  **Handle Failure:** If ANY of these are missing (or their resolved paths do not exist), Announce: "Conductor is not set up. Please run `conductor setup`." and HALT.
 
 
 ---
@@ -23,10 +25,10 @@ CRITICAL: You must validate the success of every tool call. If any tool call fai
 ## 2.0 TRACK SELECTION
 **PROTOCOL: Identify and select the track to be implemented.**
 
-1.  **Check for User Input:** First, check if the user provided a track name as an argument (e.g., `/conductor:implement <track_description>`).
+1.  **Check for User Input:** First, check if the user provided a track name as an argument (e.g., `conductor implement <track_description>`).
 
 2.  **Locate and Parse Tracks Registry:**
-    -   Resolve the **Tracks Registry**.
+    -   Resolve the **Tracks Registry** (default: `conductor/tracks.md`).
     -   Read and parse this file. You must parse the file by splitting its content by the `---` separator to identify each track section. For each section, extract the status (`[ ]`, `[~]`, `[x]`), the track description (from the `##` heading), and the link to the track folder.
     -   **CRITICAL:** If no track sections are found after parsing, announce: "The tracks file is empty or malformed. No tracks to implement." and halt.
 
@@ -173,4 +175,3 @@ CRITICAL: You must validate the success of every tool call. If any tool call fai
                 a. **Announce Cancellation:** Announce: "Deletion cancelled. The track has not been changed."
     *   **If user chooses "C" (Skip) or provides any other input:**
         *   Announce: "Okay, the completed track will remain in your tracks file for now."
-"""

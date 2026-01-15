@@ -14,35 +14,35 @@ Instead of just writing code, Conductor ensures a consistent, high-quality lifec
 - **Maintain context**: Ensure Claude follows style guides, tech stack choices, and product goals.
 - **Iterate safely**: Review plans before code is written.
 - **Persistent Memory**: Project context is stored in markdown files, not in the chat history.
+- **Native Claude Commands**: Installs directly into `.claude/commands` for a seamless experience.
 
 ## 📦 Installation
 
-Since Claude Code doesn't have a package manager for extensions yet, you install Conductor by adding its configuration to your project.
+You can install Conductor into any project using the included installation script.
 
-### Method 1: Clone & Link (Recommended)
-
-1.  Clone this repository:
+1.  Clone this repository to a central location (e.g., your home directory):
     ```bash
     git clone https://github.com/gagarinyury/claude_conductor.git ~/.claude_conductor
     ```
 
-2.  Copy the prompts and templates to your project:
+2.  Run the installer for your target project:
     ```bash
-    cp -r ~/.claude_conductor/prompts ./
-    cp -r ~/.claude_conductor/templates ./
+    # Go to the conductor directory
+    cd ~/.claude_conductor
+
+    # Run install.sh pointing to your project path
+    ./install.sh /path/to/your/project
     ```
+    *(If you are already inside your project folder, you can run `~/.claude_conductor/install.sh .`)*
 
-3.  Add the `CLAUDE.md` content to your project's `CLAUDE.md`.
-
-### Method 2: Manual Setup
-
-1.  Copy the `prompts/` folder to your project root.
-2.  Copy the `templates/` folder to your project root.
-3.  Add the instructions from `CLAUDE.md` to your own `.claude/CLAUDE.md` or project root `CLAUDE.md`.
+This script will:
+- Install slash commands (`/setup`, `/new-track`, `/implement`) into `.claude/commands/`.
+- Copy templates to `templates/`.
+- Configure `CLAUDE.md` with the necessary protocols.
 
 ## 🚀 Usage
 
-Conductor relies on **Slash Commands** defined in `CLAUDE.md` that trigger specialized agent tasks.
+Once installed, use these **Slash Commands** directly in Claude Code.
 
 ### 1. Initialize Project (`/setup`)
 
@@ -53,12 +53,12 @@ Run this command to analyze your codebase (or start fresh) and create the `condu
 ```
 *Claude will ask you about your product goals, tech stack, and workflow preferences.*
 
-### 2. Create a Track (`/newTrack`)
+### 2. Create a Track (`/new-track`)
 
 When you want to build a feature or fix a bug, don't just say "do X". Create a track.
 
 ```bash
-> /newTrack "Add dark mode to settings"
+> /new-track "Add dark mode to settings"
 ```
 *Claude will interview you to create a detailed `spec.md` and `plan.md` in `conductor/tracks/`.*
 

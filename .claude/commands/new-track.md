@@ -1,5 +1,8 @@
-description = "Plans a track, generates track-specific spec documents and updates the tracks file"
-prompt = """
+---
+description: Create a new feature track or bug fix
+argument-hint: [description]
+---
+
 ## 1.0 SYSTEM DIRECTIVE
 You are an AI agent assistant for the Conductor spec-driven development framework. Your current task is to guide the user through the creation of a new "Track" (a feature or bug fix), generate the necessary specification (`spec.md`) and plan (`plan.md`) files, and organize them within a dedicated track directory.
 
@@ -10,14 +13,14 @@ CRITICAL: You must validate the success of every tool call. If any tool call fai
 ## 1.1 SETUP CHECK
 **PROTOCOL: Verify that the Conductor environment is properly set up.**
 
-1.  **Verify Core Context:** Using the **Universal File Resolution Protocol**, resolve and verify the existence of:
+1.  **Verify Core Context:** Using the **Universal File Resolution Protocol** (see CLAUDE.md), resolve and verify the existence of:
     -   **Product Definition**
     -   **Tech Stack**
     -   **Workflow**
 
 2.  **Handle Failure:**
     -   If ANY of these files are missing, you MUST halt the operation immediately.
-    -   Announce: "Conductor is not set up. Please run `/conductor:setup` to set up the environment."
+    -   Announce: "Conductor is not set up. Please run `conductor setup` (or ask me to setup conductor) to set up the environment."
     -   Do NOT proceed to New Track Initialization.
 
 ---
@@ -29,8 +32,8 @@ CRITICAL: You must validate the success of every tool call. If any tool call fai
 
 1.  **Load Project Context:** Read and understand the content of the project documents (**Product Definition**, **Tech Stack**, etc.) resolved via the **Universal File Resolution Protocol**.
 2.  **Get Track Description:**
-    *   **If `{{args}}` contains a description:** Use the content of `{{args}}`.
-    *   **If `{{args}}` is empty:** Ask the user:
+    *   **If the user provided a description in their request:** Use that description.
+    *   **If not:** Ask the user:
         > "Please provide a brief description of the track (feature, bug fix, chore, etc.) you wish to start."
         Await the user's response and use it as the track description.
 3.  **Infer Track Type:** Analyze the description to determine if it is a "Feature" or "Something Else" (e.g., Bug, Chore, Refactor). Do NOT ask the user to classify it.
@@ -47,7 +50,7 @@ CRITICAL: You must validate the success of every tool call. If any tool call fai
         *   Provide a brief explanation and clear examples for each question.
         *   **Strongly Recommendation:** Whenever possible, present 2-3 plausible options (A, B, C) for the user to choose from.
         *   **Mandatory:** The last option for every multiple-choice question MUST be "Type your own answer".
-        
+
         *   **1. Classify Question Type:** Before formulating any question, you MUST first classify its purpose as either "Additive" or "Exclusive Choice".
             *   Use **Additive** for brainstorming and defining scope (e.g., users, goals, features, project guidelines). These questions allow for multiple answers.
             *   Use **Exclusive Choice** for foundational, singular commitments (e.g., selecting a primary technology, a specific workflow rule). These questions require a single answer.
@@ -149,6 +152,4 @@ CRITICAL: You must validate the success of every tool call. If any tool call fai
         ```
         (Replace `<Relative Track Path>` with the path to the track directory relative to the **Tracks Registry** file location.)
 7.  **Announce Completion:** Inform the user:
-    > "New track '<track_id>' has been created and added to the tracks file. You can now start implementation by running `/conductor:implement`."
-
-"""
+    > "New track '<track_id>' has been created and added to the tracks file. You can now start implementation by running `conductor implement` (or asking me to implement)."
