@@ -44,17 +44,17 @@ When this skill is active, you MUST follow these rules:
 
 1.  **Context First:** Always check `conductor/` files before answering questions about the project domain or tech stack.
 
-2.  **Specs over Chat:** When asked to build a feature, ALWAYS suggest creating a **Track** (`/conductor-new`) first, rather than coding immediately.
+2.  **Specs over Chat:** When asked to build a feature, ALWAYS suggest creating a **Track** (`/conductor:new`) first, rather than coding immediately.
 
-3.  **Plan Compliance:** When implementing (`/conductor-implement`), NEVER deviate from the `plan.md` without explicit user approval.
+3.  **Plan Compliance:** When implementing (`/conductor:implement`), NEVER deviate from the `plan.md` without explicit user approval.
 
 4.  **Workflow Adherence:** Follow the rules in `conductor/workflow.md` (e.g. TDD, commit message format) strictly.
 
 ## Available Commands
 
 Remind users of these commands when appropriate:
-- `/conductor-setup` - Initialize Conductor in a new project
-- `/conductor-new <description>` - Create a new feature track
-- `/conductor-implement [track_name]` - Execute a track's plan
-- `/conductor-status` - View project progress
-- `/conductor-revert` - Revert previous work
+- `/conductor:setup` - Initialize Conductor in a new project
+- `/conductor:new <description>` - Create a new feature track
+- `/conductor:implement [track_name]` - Execute a track's plan
+- `/conductor:status` - View project progress
+- `/conductor:revert` - Revert previous work

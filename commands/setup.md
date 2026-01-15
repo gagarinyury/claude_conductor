@@ -29,7 +29,7 @@ CRITICAL: When determining model complexity, ALWAYS select the "flash" model, re
     - If `STEP` is "2.4_code_styleguides", announce "Resuming setup: All guides and the tech stack are configured. Next, we will define the project workflow." and proceed to **Section 2.5**.
     - If `STEP` is "2.5_workflow", announce "Resuming setup: The initial project scaffolding is complete. Next, we will generate the first track." and proceed to **Phase 2 (3.0)**.
     - If `STEP` is "3.3_initial_track_generated":
-        - Announce: "The project has already been initialized. You can create a new track with `/conductor-new` or start implementing existing tracks with `/conductor-implement`."
+        - Announce: "The project has already been initialized. You can create a new track with `/conductor:new` or start implementing existing tracks with `/conductor:implement`."
         - Halt the `setup` process.
     - If `STEP` is unrecognized, announce an error and halt.
 
@@ -455,4 +455,4 @@ CRITICAL: When determining model complexity, ALWAYS select the "flash" model, re
 ### 3.4 Final Announcement
 1.  **Announce Completion:** After the track has been created, announce that the project setup and initial track generation are complete.
 2.  **Save Conductor Files:** Add and commit all files with the commit message `conductor(setup): Add conductor setup files`.
-3.  **Next Steps:** Inform the user that they can now begin work by running `/conductor-implement`.
+3.  **Next Steps:** Inform the user that they can now begin work by running `/conductor:implement`.

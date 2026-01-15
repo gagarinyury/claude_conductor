@@ -37,18 +37,18 @@ claude plugin install conductor
 
 | Command | Description |
 |---------|-------------|
-| `/conductor-setup` | Initialize Conductor in a new project. Creates `conductor/` folder with product, tech stack, and workflow definitions |
-| `/conductor-new <description>` | Create a new feature track or bug fix. Generates `spec.md` and `plan.md` |
-| `/conductor-implement [track]` | Execute the tasks defined in a track's plan following your workflow |
-| `/conductor-status` | Display the current progress of all tracks |
-| `/conductor-revert` | Revert previous work (tracks, phases, or tasks) with git awareness |
+| `/conductor:setup` | Initialize Conductor in a new project. Creates `conductor/` folder with product, tech stack, and workflow definitions |
+| `/conductor:new <description>` | Create a new feature track or bug fix. Generates `spec.md` and `plan.md` |
+| `/conductor:implement [track]` | Execute the tasks defined in a track's plan following your workflow |
+| `/conductor:status` | Display the current progress of all tracks |
+| `/conductor:revert` | Revert previous work (tracks, phases, or tasks) with git awareness |
 
 ## Usage
 
 ### 1. Initialize Project
 
 ```
-> /conductor-setup
+> /conductor:setup
 ```
 
 Claude will interview you about your product goals, tech stack, and workflow preferences, then create the `conductor/` context folder.
@@ -58,7 +58,7 @@ Claude will interview you about your product goals, tech stack, and workflow pre
 When you want to build a feature or fix a bug, create a track instead of coding immediately:
 
 ```
-> /conductor-new "Add dark mode to settings"
+> /conductor:new "Add dark mode to settings"
 ```
 
 Claude will create a detailed `spec.md` and `plan.md` in `conductor/tracks/`.
@@ -68,7 +68,7 @@ Claude will create a detailed `spec.md` and `plan.md` in `conductor/tracks/`.
 Execute the plan. Claude will follow TDD or your custom workflow defined in `conductor/workflow.md`:
 
 ```
-> /conductor-implement
+> /conductor:implement
 ```
 
 Claude works through the checklist in `plan.md`, marking tasks as done and committing changes.
@@ -76,7 +76,7 @@ Claude works through the checklist in `plan.md`, marking tasks as done and commi
 ### 4. Check Status
 
 ```
-> /conductor-status
+> /conductor:status
 ```
 
 Get an overview of all tracks and their progress.
@@ -107,11 +107,11 @@ conductor/
 │   ├── plugin.json       # Plugin manifest
 │   └── marketplace.json  # Marketplace definition
 ├── commands/             # Slash commands
-│   ├── conductor-setup.md
-│   ├── conductor-new.md
-│   ├── conductor-implement.md
-│   ├── conductor-status.md
-│   └── conductor-revert.md
+│   ├── setup.md
+│   ├── new.md
+│   ├── implement.md
+│   ├── status.md
+│   └── revert.md
 ├── skills/               # Auto-activated skills
 │   └── conductor-context/
 │       └── SKILL.md

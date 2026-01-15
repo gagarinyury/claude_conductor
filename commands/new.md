@@ -21,7 +21,7 @@ CRITICAL: You must validate the success of every tool call. If any tool call fai
 
 2.  **Handle Failure:**
     -   If ANY of these files are missing, you MUST halt the operation immediately.
-    -   Announce: "Conductor is not set up. Please run `/conductor-setup` (or ask me to setup conductor) to set up the environment."
+    -   Announce: "Conductor is not set up. Please run `/conductor:setup` (or ask me to setup conductor) to set up the environment."
     -   Do NOT proceed to New Track Initialization.
 
 ---
@@ -153,4 +153,4 @@ CRITICAL: You must validate the success of every tool call. If any tool call fai
         ```
         (Replace `<Relative Track Path>` with the path to the track directory relative to the **Tracks Registry** file location.)
 7.  **Announce Completion:** Inform the user:
-    > "New track '<track_id>' has been created and added to the tracks file. You can now start implementation by running `/conductor-implement` (or asking me to implement)."
+    > "New track '<track_id>' has been created and added to the tracks file. You can now start implementation by running `/conductor:implement` (or asking me to implement)."
