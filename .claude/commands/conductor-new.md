@@ -20,7 +20,7 @@ CRITICAL: You must validate the success of every tool call. If any tool call fai
 
 2.  **Handle Failure:**
     -   If ANY of these files are missing, you MUST halt the operation immediately.
-    -   Announce: "Conductor is not set up. Please run `conductor setup` (or ask me to setup conductor) to set up the environment."
+    -   Announce: "Conductor is not set up. Please run `/conductor-setup` (or ask me to setup conductor) to set up the environment."
     -   Do NOT proceed to New Track Initialization.
 
 ---
@@ -114,7 +114,7 @@ CRITICAL: You must validate the success of every tool call. If any tool call fai
 
 ### 2.4 Create Track Artifacts and Update Main Plan
 
-1.  **Check for existing track name:** Before generating a new Track ID, resolve the **Tracks Directory** using the **Universal File Resolution Protocol**. List all existing track directories in that resolved path. Extract the short names from these track IDs (e.g., ``shortname_YYYYMMDD`` -> `shortname`). If the proposed short name for the new track (derived from the initial description) matches an existing short name, halt the `newTrack` creation. Explain that a track with that name already exists and suggest choosing a different name or resuming the existing track.
+1.  **Check for existing track name:** Before generating a new Track ID, resolve the **Tracks Directory** using the **Universal File Resolution Protocol**. List all existing track directories in that resolved path. Extract the short names from these track IDs (e.g., ``shortname_YYYYMMDD`` -> `shortname`). If the proposed short name for the new track (derived from the initial description) matches an existing short name, halt the `conductor-new` creation. Explain that a track with that name already exists and suggest choosing a different name or resuming the existing track.
 2.  **Generate Track ID:** Create a unique Track ID (e.g., ``shortname_YYYYMMDD``).
 3.  **Create Directory:** Create a new directory for the tracks: `<Tracks Directory>/<track_id>/`.
 4.  **Create `metadata.json`:** Create a metadata file at `<Tracks Directory>/<track_id>/metadata.json` with content like:
@@ -152,4 +152,4 @@ CRITICAL: You must validate the success of every tool call. If any tool call fai
         ```
         (Replace `<Relative Track Path>` with the path to the track directory relative to the **Tracks Registry** file location.)
 7.  **Announce Completion:** Inform the user:
-    > "New track '<track_id>' has been created and added to the tracks file. You can now start implementation by running `conductor implement` (or asking me to implement)."
+    > "New track '<track_id>' has been created and added to the tracks file. You can now start implementation by running `/conductor-implement` (or asking me to implement)."
