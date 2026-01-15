@@ -5,6 +5,13 @@
 </p>
 
 <p align="center">
+  <img src="https://img.shields.io/badge/Claude%20Code-Plugin-blueviolet" alt="Claude Code Plugin">
+  <img src="https://img.shields.io/badge/version-1.0.0-green" alt="Version">
+  <img src="https://img.shields.io/badge/license-Apache%202.0-blue" alt="License">
+  <img src="https://img.shields.io/github/stars/gagarinyury/claude_conductor?style=social" alt="Stars">
+</p>
+
+<p align="center">
   <a href="#installation">Installation</a> •
   <a href="#commands">Commands</a> •
   <a href="#usage">Usage</a> •
